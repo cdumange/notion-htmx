@@ -1,0 +1,9 @@
+name: docker
+run-name: ${{ github.actor }} is being dockerized
+on: [push]
+jobs:
+  dockerize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: docker build .
