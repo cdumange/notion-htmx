@@ -1,0 +1,12 @@
+name: test
+run-name: ${{ github.actor }} is being tested
+on: [push]
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm run test-docker
