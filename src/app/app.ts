@@ -1,8 +1,9 @@
 import * as Koa from "koa";
 import * as bodyParser from "koa-bodyparser";
-import * as KoaPug from 'koa-pug'
-
+import { KoaPug } from 'koa-pug'
 const Pug = require('koa-pug')
+import * as KoaStatic from "koa-static"
+
 const path = require('path')
 
 import { registerFizzbuzz } from "../routing/fizzbuzz";
@@ -13,8 +14,9 @@ import Router = require("koa-router");
 
 const app: Koa = new Koa();
 app.use(bodyParser());
+app.use(KoaStatic(path.resolve(__dirname, '../dist')))
 
-new Pug({
+const pug = new Pug({
         viewPath: path.resolve(__dirname, '../pages'),
     helperPath: [
       { _: require('lodash') }

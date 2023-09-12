@@ -9,7 +9,8 @@
     "experimentalDecorators": false,
     "emitDecoratorMetadata": false,
     "noEmitOnError": false,
-    "sourceMap": true
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
   },
   "exclude": ["node_modules", "src/**/*.spec.ts"]
 }
