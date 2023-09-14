@@ -1,10 +1,10 @@
 import * as Koa from "koa";
 import * as bodyParser from "koa-bodyparser";
-import { KoaPug } from 'koa-pug'
-const Pug = require('koa-pug')
-import * as KoaStatic from "koa-static"
+import { KoaPug } from "koa-pug";
+const Pug = require("koa-pug");
+import * as KoaStatic from "koa-static";
 
-const path = require('path')
+const path = require("path");
 
 import { registerFizzbuzz } from "../routing/fizzbuzz";
 import { FizzBuzz } from "../usecases/fizzbuzz/fizzbuzz";
@@ -14,29 +14,57 @@ import Router = require("koa-router");
 
 const app: Koa = new Koa();
 app.use(bodyParser());
-app.use(KoaStatic(path.resolve(__dirname, '../dist')))
+app.use(KoaStatic(path.resolve(__dirname, "../dist")));
 
 const pug = new Pug({
-        viewPath: path.resolve(__dirname, '../pages'),
-    helperPath: [
-      { _: require('lodash') }
-    ],
-    app: app,
-  })
+  viewPath: path.resolve(__dirname, "../pages"),
+  helperPath: [{ _: require("lodash") }],
+  app: app,
+});
 
 const statManager = new InMemoryStatManager();
 
 registerFizzbuzz(app, FizzBuzz, statManager);
 registerStats(app, statManager);
 
-var r =  new Router()
+var r = new Router();
 r.get("", async (ctx) => {
-    await ctx.render('index')
-})
+  await ctx.render("index", {
+    categories: [
+      {
+        name: "test",
+        tasks: [
+          {
+            name: "task",
+          },
+          {
+            name: "retask",
+          },
+        ],
+      },
+      {
+        name: "retest",
+        tasks: [
+          {
+            name: "re task",
+            description: "a description",
+          },
+          {
+            name: "re retask",
+            description: "another description",
+          },
+        ],
+      },
+    ],
+  });
+});
 
-app.use(r.routes())
+r.get("/tasks", async (ctx) => {
+  await ctx.render("test");
+});
+
+app.use(r.routes());
 
 app.on("error", console.error);
-
 
 export default app;

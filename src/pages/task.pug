@@ -1,0 +1,9 @@
+mixin task(t)
+    div(x-data="{ editMod: false }" class="rounded bg-slate-300 p-3 pt-5" draggable="true") 
+        div(x-show="editMod == false")
+            span(class="bold") #{t.name}
+            span #{t.description}
+            input(type="button", value="modify" x-on:click="editMod = true")
+        div(x-show="editMod")
+            input(type="text", name="name" value=t.name)
+            input(type="button", value="cancel" x-on:click='editMod = false')

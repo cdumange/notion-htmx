@@ -2,7 +2,10 @@ doctype html
 html
     head
         script(src="https://unpkg.com/htmx.org@1.9.5")
+        script(src="https://unpkg.com/htmx.org/dist/ext/class-tools.js") 
+        script(src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.0/dist/cdn.min.js") 
         link(rel='stylesheet', type='text/css', href='/output.css')
     body 
         div(class="bg-slate-100")
             |This is my first page !
+    include listTasks

@@ -1,0 +1,10 @@
+include task.pug 
+
+div(class="flex flex-row" )
+    each category in categories 
+        div(class="flex flex-col p-5 pt-3 bg-slate-200 rounded")
+            span #{category.name}
+            each task in category.tasks 
+                +task(task)  
+
+        
